@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guess My Valentine ❤️</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #ff4e8a, #ff99ac);
+            color: white;
+            text-align: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        /* Shake Animation */
+        
+        @keyframes shake {
+            0% {
+                transform: translateX(0);
+            }
+            20% {
+                transform: translateX(-10px);
+            }
+            40% {
+                transform: translateX(10px);
+            }
+            60% {
+                transform: translateX(-10px);
+            }
+            80% {
+                transform: translateX(10px);
+            }
+            100% {
+                transform: translateX(0);
+            }
+        }
+        
+        .shake {
+            animation: shake 0.5s;
+        }
+        /* Hidden Content */
+        
+        .hidden {
+            display: none;
+        }
+        /* Card */
+        
+        .card {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
+            max-width: 400px;
+            margin: 40px auto;
+            animation: fadeIn 2s ease-in-out;
+        }
+        
+        img {
+            width: 100%;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
+        }
+        
+        button {
+            background: #ff3366;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 30px;
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+            margin-top: 120px;
+            transition: 0.3s;
+        }
+        
+        button:hover {
+            background: #ff0033;
+            transform: scale(1.1);
+        }
+        /* Floating Hearts */
+        
+        .heart {
+            position: fixed;
+            color: rgba(255, 255, 255, 0.7);
+            animation: float 6s infinite;
+            font-size: 20px;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(100vh);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-10vh);
+                opacity: 0;
+            }
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<body id="body">
+
+    <button id="guessBtn" onclick="askName()">Guess Who Is My Valentine? ❤️</button>
+
+    <div id="content" class="hidden">
+        <div class="card">
+            <img src="C:\Users\Thami\Downloads\boniswa\vali.jpeg" alt="My Love">
+
+            <h1>Happy Valentine's Day love❤️</h1>
+
+            <p>
+                From the moment you entered my life, everything became brighter and more beautiful.
+            </p>
+
+            <p>
+                You are my peace, my happiness, and the love I prayed for.
+            </p>
+
+            <h2>Will You Be Mine Forever? 💍❤️</h2>
+            <p>Love always,<br>Thami</p>
+        </div>
+    </div>
+
+    <script>
+        function askName() {
+            let guess = prompt("Enter her name 😌");
+
+            if (!guess) return;
+
+            // Remove spaces and make lowercase
+            guess = guess.trim().toLowerCase();
+
+            // Compare in lowercase
+            if (guess === "boniswa") {
+                document.getElementById("content").classList.remove("hidden");
+                document.getElementById("guessBtn").style.display = "none";
+                startHearts();
+            } else {
+                shakeScreen();
+                setTimeout(() => {
+                    alert("Wrong name 😅 Try again!");
+                    askName();
+                }, 500);
+            }
+        }
+
+        function shakeScreen() {
+            const body = document.body; // safer than getElementById("body")
+            body.classList.add("shake");
+            setTimeout(() => {
+                body.classList.remove("shake");
+            }, 500);
+        }
+
+        function startHearts() {
+            for (let i = 0; i < 30; i++) {
+                let heart = document.createElement("div");
+                heart.innerHTML = "❤️";
+                heart.className = "heart";
+                heart.style.left = Math.random() * 100 + "vw";
+                heart.style.animationDuration = (Math.random() * 5 + 3) + "s";
+                document.body.appendChild(heart);
+            }
+        }
+    </script>
+
+
+</body>
+
+</html>
